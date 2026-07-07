@@ -29,7 +29,7 @@ async function login() {
 
             showToast(" Login Successful");
 
-            window.location.href = "dashboard.html";
+            window.location.href = "/HTML/dashboard.html";
 
         } else {
 
