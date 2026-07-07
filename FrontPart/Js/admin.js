@@ -326,8 +326,7 @@ async function addBus() {
         scheduledArrival: document.getElementById("arrival").value,
 
         busType: document.getElementById("busType").value
-        latitude: 12.9716,
-longitude: 77.5946,
+       
 
     };
 
