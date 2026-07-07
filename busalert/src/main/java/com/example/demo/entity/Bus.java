@@ -13,12 +13,10 @@ import jakarta.validation.constraints.NotNull;
 public class Bus {
 
 
-    @NotNull
-@Column(nullable = false)
+    @Column
 private Double latitude;
 
-@NotNull
-@Column(nullable = false)
+@Column
 private Double longitude;
 
     @Id
