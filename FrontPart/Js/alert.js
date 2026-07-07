@@ -16,7 +16,7 @@ async function createAlert(){
 
     try{
 
-        const response=await fetch("http://localhost:8080/api/alerts",{
+        const response=await fetch("https://sincere-perfection-production-b375.up.railway.app/api/alerts",{
 
             method:"POST",
 
