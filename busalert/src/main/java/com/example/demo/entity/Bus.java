@@ -12,6 +12,15 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "bus")
 public class Bus {
 
+
+    @NotNull
+@Column(nullable = false)
+private Double latitude;
+
+@NotNull
+@Column(nullable = false)
+private Double longitude;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,19 +56,28 @@ public class Bus {
     }
 
     // All-Argument Constructor
-    public Bus(Long id, String busNumber, String busName, String source,
-               String destination, LocalTime scheduledDeparture,
-               LocalTime scheduledArrival, BusType busType) {
+   public Bus(Long id,
+           String busNumber,
+           String busName,
+           String source,
+           String destination,
+           LocalTime scheduledDeparture,
+           LocalTime scheduledArrival,
+           BusType busType,
+           Double latitude,
+           Double longitude) {
 
-        this.id = id;
-        this.busNumber = busNumber;
-        this.busName = busName;
-        this.source = source;
-        this.destination = destination;
-        this.scheduledDeparture = scheduledDeparture;
-        this.scheduledArrival = scheduledArrival;
-        this.busType = busType;
-    }
+    this.id = id;
+    this.busNumber = busNumber;
+    this.busName = busName;
+    this.source = source;
+    this.destination = destination;
+    this.scheduledDeparture = scheduledDeparture;
+    this.scheduledArrival = scheduledArrival;
+    this.busType = busType;
+    this.latitude = latitude;
+    this.longitude = longitude;
+}
 
     // Getters and Setters
 
@@ -126,4 +144,20 @@ public class Bus {
     public void setBusType(BusType busType) {
         this.busType = busType;
     }
+
+    public Double getLatitude() {
+    return latitude;
+}
+
+public void setLatitude(Double latitude) {
+    this.latitude = latitude;
+}
+
+public Double getLongitude() {
+    return longitude;
+}
+
+public void setLongitude(Double longitude) {
+    this.longitude = longitude;
+}
 }
