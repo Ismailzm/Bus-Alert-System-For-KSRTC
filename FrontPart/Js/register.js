@@ -6,7 +6,7 @@ async function registerUser() {
 
     try {
 
-        const response = await fetch("http://localhost:8080/api/users/register", {
+        const response = await fetch("https://sincere-perfection-production-b375.up.railway.app/api/users/register", {
 
             method: "POST",
 
