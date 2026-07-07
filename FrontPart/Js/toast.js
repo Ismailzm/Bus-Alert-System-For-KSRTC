@@ -5,7 +5,7 @@ function showToast(message,type="success"){
     if(!container){
 
         container=document.createElement("div");
-
+ 
         container.className="toast-container";
 
         document.body.appendChild(container);
