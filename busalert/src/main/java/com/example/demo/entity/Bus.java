@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 import com.example.demo.enums.BusType;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
