@@ -7,7 +7,7 @@ async function loadReports(){
     try{
 
         const response = await fetch(
-            "http://localhost:8080/api/delay/pending"
+            "https://sincere-perfection-production-b375.up.railway.app/api/delay/pending"
         );
 
         const reports = await response.json();
@@ -100,7 +100,7 @@ async function approveReport(id){
 
         const response = await fetch(
 
-            `http://localhost:8080/api/delay/approve/${id}`,
+            `https://sincere-perfection-production-b375.up.railway.app/api/delay/approve/${id}`,
 
             {
 
@@ -142,7 +142,7 @@ async function rejectReport(id){
 
         const response = await fetch(
 
-            `http://localhost:8080/api/delay/reject/${id}`,
+            `https://sincere-perfection-production-b375.up.railway.app/api/delay/reject/${id}`,
 
             {
 
