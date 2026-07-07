@@ -28,7 +28,7 @@ async function registerUser() {
 
             showToast("Registration Successful");
 
-            window.location.href = "login.html";
+            window.location.href = "index.html";
 
         } else {
 
