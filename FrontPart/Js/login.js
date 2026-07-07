@@ -5,7 +5,7 @@ async function login() {
 
     try {
 
-        const response = await fetch("http://localhost:8080/api/users/login", {
+        const response = await fetch("https://sincere-perfection-production-b375.up.railway.app/api/users/login", {
 
             method: "POST",
 
