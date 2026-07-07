@@ -69,7 +69,7 @@ async function searchBus() {
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/buses/search?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
+            `https://sincere-perfection-production-b375.up.railway.app/api/buses/search?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
         );
 
         if (!response.ok) {
@@ -146,7 +146,7 @@ async function trackBus(busNumber){
 
         await fetch(
 
-            `http://localhost:8080/api/tracking/start?userId=${localStorage.getItem("userId")}&busNumber=${busNumber}`,
+            `https://sincere-perfection-production-b375.up.railway.app/api/tracking/start?userId=${localStorage.getItem("userId")}&busNumber=${busNumber}`,
 
             {
 
