@@ -32,6 +32,17 @@ public class BusService {
     // Save Bus
     public Bus saveBus(Bus bus) {
 
+          if (bus.getLatitude() == null) {
+        bus.setLatitude(12.9716);
+    }
+
+    if (bus.getLongitude() == null) {
+        bus.setLongitude(77.5946);
+    }
+
+        System.out.println("Latitude : " + bus.getLatitude());
+System.out.println("Longitude: " + bus.getLongitude());
+
         Bus savedBus = busRepository.save(bus);
 
         List<Alert> activeAlerts = alertRepository.findByStatus(AlertStatus.ACTIVE);
