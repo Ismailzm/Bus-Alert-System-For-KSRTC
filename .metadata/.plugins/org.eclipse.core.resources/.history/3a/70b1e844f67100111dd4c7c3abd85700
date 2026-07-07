@@ -1,0 +1,43 @@
+package com.example.demo.service;
+
+
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Alert;
+import com.example.demo.enums.AlertStatus;
+import com.example.demo.repository.AlertRepository;
+import com.example.demo.entity.Bus;
+import com.example.demo.repository.BusRepository;
+
+@Service
+public class AlertService {
+
+	private final AlertRepository alertRepository;
+	private final BusRepository busRepository;
+
+	public AlertService(AlertRepository alertRepository,
+	                    BusRepository busRepository) {
+
+	    this.alertRepository = alertRepository;
+	    this.busRepository = busRepository;
+	}
+
+    // Create Alert
+    public Alert createAlert(Alert alert) {
+
+        alert.setStatus(AlertStatus.ACTIVE);
+
+        return alertRepository.save(alert);
+    }
+
+    // Get Alerts By User
+    public List<Alert> getAlertsByUser(Long userId) {
+
+        return alertRepository.findByUserId(userId);
+
+    }
+
+}

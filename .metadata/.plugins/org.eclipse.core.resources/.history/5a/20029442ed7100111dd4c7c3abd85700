@@ -1,0 +1,55 @@
+package com.example.demo.controller;
+
+
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.entity.Bus;
+import com.example.demo.service.BusService;
+
+@RestController
+@RequestMapping("/api/buses")
+@CrossOrigin(origins = "*")
+public class BusController {
+
+    private final BusService busService;
+
+    public BusController(BusService busService) {
+        this.busService = busService;
+    }
+
+    // Add Bus
+//    @PostMapping
+//    public Bus addBus(@RequestBody Bus bus) {
+//        return busService.saveBus(bus);
+//    }
+    
+    @PostMapping
+    public Bus addBus(@RequestBody Bus bus) {
+        return busService.saveBus(bus);
+    }
+
+    // Get All Buses
+    @GetMapping
+    public List<Bus> getAllBuses() {
+        return busService.getAllBuses();
+    }
+
+    // Get Bus By Bus Number
+    @GetMapping("/{busNumber}")
+    public Bus getBusByNumber(@PathVariable String busNumber) {
+        return busService.getBusByNumber(busNumber);
+    }
+    
+    @PutMapping("/{busNumber}")
+    public Bus updateBus(@PathVariable String busNumber,
+                         @RequestBody Bus bus) {
+
+        return busService.updateBus(busNumber, bus);
+    }
+    
+    
+    
+}
