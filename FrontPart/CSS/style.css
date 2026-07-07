@@ -1,0 +1,247 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    /* IMPORTANT */
+    background-image:url("../images/ksrt-bg.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    overflow:hidden;
+}
+
+/* Dark overlay */
+
+.overlay{
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* Login Card */
+
+.login-card{
+
+    width:430px;
+
+    padding:35px;
+
+    background:rgba(0,0,0,.72);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:0 10px 40px rgba(0,0,0,.6);
+
+    text-align:center;
+
+    color:white;
+
+}
+
+/* Bus Logo */
+
+.logo{
+
+    font-size:70px;
+
+    margin-bottom:10px;
+
+    animation:float 2s infinite ease-in-out;
+
+}
+
+@keyframes float{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+
+}
+
+/* Heading */
+
+h1{
+
+    font-size:55px;
+
+    color:#FFC107;
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+}
+
+.tagline{
+
+    color:#ffffff;
+
+    font-size:18px;
+
+    margin-bottom:20px;
+
+}
+
+/* Kannada Scrolling */
+
+.marquee{
+
+    background:#d62828;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:25px;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+}
+
+/* Login */
+
+.login-card h2{
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+/* Input */
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin:12px 0;
+
+    border:none;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:17px;
+
+    background:white;
+
+}
+
+input:focus{
+
+    box-shadow:0 0 15px #FFC107;
+
+}
+
+/* Button */
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:linear-gradient(90deg,#e53935,#ff7043);
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:0 0 20px rgba(255,87,34,.6);
+
+}
+
+/* Register */
+
+.register{
+
+    margin-top:20px;
+
+    font-size:17px;
+
+}
+
+.register a{
+
+    color:#FFC107;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.register a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* Footer */
+
+.footer{
+
+    margin-top:25px;
+
+    padding-top:15px;
+
+    border-top:1px solid rgba(255,255,255,.2);
+
+    color:#ddd;
+
+    font-size:14px;
+
+}

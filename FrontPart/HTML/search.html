@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Bus</title>
+
+    <link rel="stylesheet" href="../CSS/search.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>🚌 Bus Search</h1>
+
+        <a href="dashboard.html" class="backBtn">⬅ Dashboard</a>
+
+    </div>
+
+    <div class="searchBox">
+
+       <label>Source</label>
+
+<select id="source">
+
+    <option value="">Select Source</option>
+
+</select>
+
+<label>Destination</label>
+
+<select id="destination">
+
+    <option value="">Select Destination</option>
+
+</select>
+
+        
+
+        <button onclick="searchBus()">
+            🔍 Search Bus
+        </button>
+
+    </div>
+
+    <div class="tableContainer">
+
+        <table id="busTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Bus Number</th>
+
+                    <th>Bus Name</th>
+
+                    <th>Source</th>
+
+                    <th>Destination</th>
+
+                    <th>Bus Type</th>
+
+                    <th>Departure</th>
+
+                    <th>Arrival</th>
+                    
+                    <th>Live Tracking</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<link rel="stylesheet" href="../CSS/toast.css">
+
+<script src="../Js/toast.js"></script>
+
+<script src="../Js/search.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="../CSS/admin.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>🚌 Bus Administration</h1>
+
+        <a href="dashboard.html" class="backBtn">
+            ⬅ Dashboard
+        </a>
+
+    </div>
+
+   <div class="card" id="busForm">
+
+        <h2>Add New Bus</h2>
+
+        <input id="busNumber" placeholder="Bus Number">
+
+        <input id="busName" placeholder="Bus Name">
+
+        <label>Source</label>
+
+<select id="source">
+
+    <option value="">Select Source</option>
+
+</select>
+
+        <label>Destination</label>
+
+<select id="destination">
+
+    <option value="">Select Destination</option>
+
+</select>
+
+        <label>Departure</label>
+
+        <input type="time" id="departure">
+
+        <label>Arrival</label>
+
+        <input type="time" id="arrival">
+
+        <label>Bus Type</label>
+
+        <select id="busType">
+
+            <option value="VOLVO">VOLVO</option>
+
+            <option value="AC">AC</option>
+
+            <option value="NON_AC">NON_AC</option>
+
+        </select>
+
+       <button id="saveBtn" onclick="saveBus()">
+    ➕ Add Bus
+</button>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>All Buses</h2>
+
+        <table>
+
+            <thead>
+<tr>
+
+    <th>Bus No.</th>
+    <th>Bus Name</th>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Type</th>
+   
+    <th>Bus Actions</th>
+<th>Trip</th>
+
+</tr>
+
+            </thead>
+
+            <tbody id="busTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- Delete Confirmation Modal -->
+
+<div id="deleteModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>⚠ Delete Bus</h2>
+
+        <p id="deleteMessage"></p>
+
+        <div class="modal-buttons">
+
+            <button class="cancelBtn"
+                    onclick="closeDeleteModal()">
+
+                Cancel
+
+            </button>
+
+            <button class="deleteBtn"
+                    onclick="confirmDelete()">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="../CSS/toast.css">
+
+<script src="../Js/toast.js"></script>
+
+
+
+<script src="../Js/admin.js"></script>
+
+</body>
+
+</html>

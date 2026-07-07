@@ -1,0 +1,12 @@
+package com.example.demo.enums;
+
+
+
+
+public enum AlertStatus {
+
+    ACTIVE,
+    MATCHED,
+    CANCELLED
+
+}

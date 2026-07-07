@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Alert</title>
+
+    <link rel="stylesheet" href="../CSS/alert.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>🚨 Create Bus Alert</h1>
+
+        <a href="dashboard.html" class="backBtn">⬅ Dashboard</a>
+
+    </div>
+
+    <div class="alertCard">
+
+        <label>Source</label>
+
+        <input
+            type="text"
+            id="source"
+            placeholder="Enter Source">
+
+        <label>Destination</label>
+
+        <input
+            type="text"
+            id="destination"
+            placeholder="Enter Destination">
+
+        <label>Bus Type</label>
+
+        <select id="busType">
+
+            <option value="VOLVO">VOLVO</option>
+
+            <option value="AC">AC</option>
+
+            <option value="NON_AC">NON_AC</option>
+
+        </select>
+
+        <button onclick="createAlert()">
+
+            🚨 Create Alert
+
+        </button>
+
+    </div>
+
+    <div id="message"></div>
+
+</div>
+<link rel="stylesheet" href="../CSS/toast.css">
+
+<script src="../Js/toast.js"></script>
+
+
+
+<script src="../Js/alert.js"></script>
+
+</body>
+
+</html>
