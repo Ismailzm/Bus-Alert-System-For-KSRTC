@@ -184,7 +184,7 @@ async function loadTracking(selectedBus){
     try{
 
         const response = await fetch(
-            `http://localhost:8080/api/live/${busNumber}`
+            `https://sincere-perfection-production-b375.up.railway.app/api/live/${busNumber}`
         );
 
         if(!response.ok){
@@ -345,7 +345,7 @@ async function drawRoute(source,destination){
 
         const response = await fetch(
 
-            `http://localhost:8080/api/routes?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
+            `https://sincere-perfection-production-b375.up.railway.app/api/routes?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
 
         );
 
