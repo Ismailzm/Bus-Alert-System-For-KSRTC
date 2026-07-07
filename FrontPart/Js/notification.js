@@ -5,7 +5,7 @@ async function loadNotifications(){
     try{
 
         const response = await fetch(
-            `http://localhost:8080/api/notifications/user/${userId}`
+            `https://sincere-perfection-production-b375.up.railway.app/api/notifications/user/${userId}`
         );
 
         const notifications = await response.json();
@@ -74,7 +74,7 @@ async function deleteNotification(id){
 
         const response = await fetch(
 
-            `http://localhost:8080/api/notifications/${id}`,
+            `https://sincere-perfection-production-b375.up.railway.app/api/notifications/${id}`,
 
             {
 
@@ -118,7 +118,7 @@ async function clearAllNotifications(){
 
         const response = await fetch(
 
-            `http://localhost:8080/api/notifications/user/${localStorage.getItem("userId")}`,
+            `https://sincere-perfection-production-b375.up.railway.app/api/notifications/user/${localStorage.getItem("userId")}`,
 
             {
 
