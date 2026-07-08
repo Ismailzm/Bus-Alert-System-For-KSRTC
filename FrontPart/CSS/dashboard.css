@@ -153,9 +153,26 @@ body{
 /* ===================================
    Mobile Responsive
 =================================== */
-
+ .map-container{
+    flex:1;
+    height:650px;
+    border-radius:15px;
+}
 @media (max-width: 768px){
+         body{
+        display:block;
+    }
 
+    
+
+.map-container{
+    width:100%;
+    height:350px;
+}
+
+
+
+    
     /* Sidebar */
 
     .sidebar{
