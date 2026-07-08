@@ -78,7 +78,7 @@ async function loadBuses() {
 
     try {
 
-        const response = await fetch("https://sincere-perfection-production-b375.up.railway.app/api/buses");
+        const response = await fetch("https://laudable-integrity-production-6b9e.up.railway.app/api/buses");
 
         const buses = await response.json();
 
@@ -196,7 +196,7 @@ async function confirmDelete(){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/buses/${busToDelete}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/buses/${busToDelete}`,
 
             {
 
@@ -247,7 +247,7 @@ document.getElementById("busName").focus();
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/buses/${busNumber}`
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/buses/${busNumber}`
 
         );
 
@@ -347,7 +347,7 @@ async function addBus() {
 
     try {
 
-        const response = await fetch("https://sincere-perfection-production-b375.up.railway.app/api/buses", {
+        const response = await fetch("https://laudable-integrity-production-6b9e.up.railway.app/api/buses", {
 
             method: "POST",
 
@@ -426,7 +426,7 @@ async function updateBus(){
 
         const response=await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/buses/${selectedBusNumber}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/buses/${selectedBusNumber}`,
 
             {
 
@@ -518,7 +518,7 @@ async function startTrip(busNumber){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/trips/start/${busNumber}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/trips/start/${busNumber}`,
 
             {
 
@@ -566,7 +566,7 @@ async function endTrip(busNumber){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/trips/end/${busNumber}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/trips/end/${busNumber}`,
 
             {
 
@@ -612,7 +612,7 @@ async function reverseTrip(busNumber){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/trips/reverse/${busNumber}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/trips/reverse/${busNumber}`,
 
             {
 
