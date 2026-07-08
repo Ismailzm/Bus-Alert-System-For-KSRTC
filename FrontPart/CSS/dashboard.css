@@ -1,3 +1,7 @@
+/* ======================================
+   Global
+====================================== */
+
 *{
     margin:0;
     padding:0;
@@ -6,263 +10,303 @@
 }
 
 body{
-
     display:flex;
-
     background:#eef3f8;
-
     overflow-x:hidden;
-
+    min-height:100vh;
 }
-/* Sidebar */
+
+/* ======================================
+   Sidebar
+====================================== */
 
 .sidebar{
-
     width:250px;
-
     height:100vh;
-
     background:#0d1b2a;
-
     color:white;
-
     padding:30px 20px;
-
     position:fixed;
-
+    left:0;
+    top:0;
+    overflow-y:auto;
 }
 
 .sidebar h2{
-
     margin-bottom:40px;
-
     color:#FFD54F;
+}
 
+.sidebar h3{
+    color:white;
+    padding:10px 0;
 }
 
 .sidebar a{
-
     display:block;
-
     color:white;
-
     text-decoration:none;
-
-    padding:15px;
-
+    padding:14px 15px;
     margin-bottom:10px;
-
     border-radius:10px;
-
     transition:.3s;
-
 }
 
 .sidebar a:hover{
-
     background:#1b263b;
-
 }
 
-/* Main */
+/* ======================================
+   Main
+====================================== */
 
 .main{
-
     margin-left:250px;
-
     width:calc(100% - 250px);
-
     padding:30px;
-
 }
 
-/* Topbar */
+/* ======================================
+   Top Bar
+====================================== */
 
 .topbar{
-
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:25px;
-
+    gap:20px;
 }
 
 .topbar h1{
-
     color:#0d1b2a;
-
+    font-size:30px;
 }
 
-/* Dashboard Cards */
+.topbar button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ======================================
+   Dashboard Cards
+====================================== */
 
 .cards{
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:20px;
-
-    margin-bottom:25px;
-
+    margin-bottom:30px;
 }
 
 .card{
-
     background:white;
-
     padding:25px;
-
     border-radius:15px;
-
     box-shadow:0 4px 15px rgba(0,0,0,.12);
-
     text-align:center;
-
 }
 
 .card h3{
-
     color:#666;
-
     margin-bottom:10px;
-
 }
 
 .card h1{
-
     color:#1565C0;
-
     font-size:40px;
-
 }
 
-/* Map */
+/* ======================================
+   Live Tracking
+====================================== */
+
+#trackingContainer{
+    margin-top:25px;
+}
+
+.tracking-layout{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+.tracking-card{
+    width:320px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.map-container{
+    flex:1;
+    width:100%;
+}
 
 #map{
-
     width:100%;
-
-    height:550px;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-/* ===================================
-   Mobile Responsive
-=================================== */
- .map-container{
-    flex:1;
     height:650px;
     border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
 }
-@media (max-width: 768px){
-         body{
-        display:block;
-    }
 
-    
+/* ======================================
+   Form Elements
+====================================== */
+
+input,
+select,
+button{
+    font-size:15px;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ======================================
+   Delay Modal
+====================================== */
+
+#delayModal{
+    z-index:9999;
+}
+
+#delayModal input,
+#delayModal select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+#delayModal button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#1565C0;
+    color:white;
+}
+
+/* ======================================
+   Tablet
+====================================== */
+
+@media (max-width:992px){
+
+.cards{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.tracking-layout{
+    flex-direction:column;
+}
+
+.tracking-card{
+    width:100%;
+}
+
+#map{
+    height:450px;
+}
+
+}
+
+/* ======================================
+   Mobile
+====================================== */
+
+@media (max-width:768px){
+
+body{
+    display:block;
+}
+
+.sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+    padding:20px;
+}
+
+.main{
+    margin-left:0;
+    width:100%;
+    padding:15px;
+}
+
+.topbar{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.topbar h1{
+    font-size:24px;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.card h1{
+    font-size:34px;
+}
+
+.tracking-layout{
+    flex-direction:column;
+}
+
+.tracking-card{
+    width:100%;
+}
 
 .map-container{
     width:100%;
-    height:350px;
 }
 
+#map{
+    width:100%;
+    height:350px;
+    margin-top:15px;
+}
 
+#delayModal>div{
+    width:95% !important;
+    padding:20px !important;
+}
 
-    
-    /* Sidebar */
+}
 
-    .sidebar{
+/* ======================================
+   Small Phones
+====================================== */
 
-        position:relative;
-        width:100%;
-        height:auto;
-        padding:20px;
+@media (max-width:480px){
 
-    }
+.main{
+    padding:10px;
+}
 
-    /* Main */
+.topbar h1{
+    font-size:21px;
+}
 
-    .main{
+.card{
+    padding:18px;
+}
 
-        margin-left:0;
-        width:100%;
-        padding:15px;
+.card h1{
+    font-size:30px;
+}
 
-    }
-
-    /* Topbar */
-
-    .topbar{
-
-        display:flex !important;
-        flex-direction:column;
-        align-items:flex-start !important;
-        gap:15px;
-
-    }
-
-    .topbar h1{
-
-        font-size:26px;
-
-    }
-
-    /* Dashboard Cards */
-
-    .cards{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .card h1{
-
-        font-size:32px;
-
-    }
-
-    /* Live Tracking */
-
-    #trackingContainer > div{
-
-        display:flex !important;
-        flex-direction:column;
-
-    }
-
-    #trackingContainer > div > div:first-child{
-
-        width:100% !important;
-
-    }
-
-    #map{
-
-        width:100%;
-        height:350px !important;
-        margin-top:20px;
-
-    }
-
-    /* Delay Popup */
-
-    #delayModal > div{
-
-        width:95% !important;
-        padding:20px !important;
-
-    }
-
-    #delayModal input,
-    #delayModal select,
-    #delayModal button{
-
-        width:100%;
-
-    }
+#map{
+    height:300px;
+}
 
 }
