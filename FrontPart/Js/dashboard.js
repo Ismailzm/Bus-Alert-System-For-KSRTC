@@ -14,7 +14,7 @@ if (!localStorage.getItem("userId")) {
 
 function loadDashboard(){
 
-fetch("https://sincere-perfection-production-b375.up.railway.app/api/dashboard")
+fetch("https://laudable-integrity-production-6b9e.up.railway.app/api/dashboard")
 
 .then(response => response.json())
 
@@ -58,7 +58,7 @@ const destination=prompt("Enter Destination");
 
 if(!destination) return;
 
-const response=await fetch(`https://sincere-perfection-production-b375.up.railway.app/api/buses/search?source=${source}&destination=${destination}`);
+const response=await fetch(`https://laudable-integrity-production-6b9e.up.railway.app/api/buses/search?source=${source}&destination=${destination}`);
 
 const data=await response.json();
 
@@ -103,7 +103,7 @@ const busType=prompt("Enter Bus Type (VOLVO / AC / NON_AC)");
 
 if(!busType) return;
 
-const response=await fetch("https://sincere-perfection-production-b375.up.railway.app/api/alerts",{
+const response=await fetch("https://laudable-integrity-production-6b9e.up.railway.app/api/alerts",{
 
 method:"POST",
 
@@ -160,7 +160,7 @@ async function loadNotifications(){
 try{
 
 const response=await fetch(
-`https://sincere-perfection-production-b375.up.railway.app/api/notifications/user/${localStorage.getItem("userId")}`
+`https://laudable-integrity-production-6b9e.up.railway.app/api/notifications/user/${localStorage.getItem("userId")}`
 );
 
 const data=await response.json();
@@ -280,7 +280,7 @@ async function loadBusNumbers(){
     try{
 
         const response = await fetch(
-            "https://sincere-perfection-production-b375.up.railway.app/api/buses"
+            "https://laudable-integrity-production-6b9e.up.railway.app/api/buses"
         );
 
         const buses = await response.json();
@@ -351,7 +351,7 @@ async function submitDelayReport(){
 
         const response = await fetch(
 
-            "https://sincere-perfection-production-b375.up.railway.app/api/delay",
+            "https://laudable-integrity-production-6b9e.up.railway.app/api/delay",
 
             {
 
