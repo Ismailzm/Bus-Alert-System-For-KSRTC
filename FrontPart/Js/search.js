@@ -69,7 +69,7 @@ async function searchBus() {
     try {
 
         const response = await fetch(
-            `https://sincere-perfection-production-b375.up.railway.app/api/buses/search?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/buses/search?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
         );
 
         if (!response.ok) {
@@ -146,7 +146,7 @@ async function trackBus(busNumber){
 
         await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/tracking/start?userId=${localStorage.getItem("userId")}&busNumber=${busNumber}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/tracking/start?userId=${localStorage.getItem("userId")}&busNumber=${busNumber}`,
 
             {
 
