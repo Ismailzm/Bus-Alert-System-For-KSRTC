@@ -7,7 +7,7 @@ async function loadReports(){
     try{
 
         const response = await fetch(
-            "https://sincere-perfection-production-b375.up.railway.app/api/delay/pending"
+            "https://laudable-integrity-production-6b9e.up.railway.app/api/delay/pending"
         );
 
         const reports = await response.json();
@@ -100,7 +100,7 @@ async function approveReport(id){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/delay/approve/${id}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/delay/approve/${id}`,
 
             {
 
@@ -142,7 +142,7 @@ async function rejectReport(id){
 
         const response = await fetch(
 
-            `https://sincere-perfection-production-b375.up.railway.app/api/delay/reject/${id}`,
+            `https://laudable-integrity-production-6b9e.up.railway.app/api/delay/reject/${id}`,
 
             {
 
