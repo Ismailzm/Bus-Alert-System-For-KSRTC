@@ -1,6 +1,6 @@
-// ===============================
+// =====================================
 // Live Tracking Variables
-// ===============================
+// =====================================
 
 let busNumber = "";
 
@@ -17,52 +17,66 @@ let currentLng = null;
 
 let animation = null;
 
-// ===============================
-// Create Map
-// ===============================
+// =====================================
+// Create Leaflet Map
+// =====================================
 
-const map = L.map("map").setView([15.3173, 75.7139], 7);
+const map = L.map("map", {
+    zoomControl: true
+}).setView([15.3173, 75.7139], 7);
 
 L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
-        attribution: "© OpenStreetMap"
+        attribution: "&copy; OpenStreetMap contributors",
+        maxZoom: 19
     }
 ).addTo(map);
 
-// ===============================
+// =====================================
+// Mobile / Responsive Fix
+// =====================================
+
+// Refresh the map whenever the window size changes
+window.addEventListener("resize", () => {
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 200);
+});
+
+// Refresh once after page loads
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 500);
+});
+
+// =====================================
 // Bus Icon
-// ===============================
+// =====================================
 
 const busIcon = L.icon({
 
     iconUrl: "../Images/bus-marker.png",
 
-    iconSize: [55,55],
+    iconSize: [55, 55],
 
-    iconAnchor: [27,55],
+    iconAnchor: [27, 55],
 
-    popupAnchor: [0,-50]
+    popupAnchor: [0, -50]
 
 });
 
-// ===============================
+// =====================================
 // Bus Marker
-// ===============================
+// =====================================
 
 const marker = L.marker(
-
-    [12.9716,77.5946],
-
+    [12.9716, 77.5946],
     {
-
         icon: busIcon
-
     }
-
 ).addTo(map);
-
-// Default Popup
 
 marker.bindPopup("🚌 Live Bus");
 
@@ -70,102 +84,72 @@ marker.bindPopup("🚌 Live Bus");
 // Smooth Bus Movement
 // =====================================
 
-function moveMarkerSmoothly(targetLat,targetLng){
+function moveMarkerSmoothly(targetLat, targetLng) {
 
-    console.log("Moving marker to:", targetLat, targetLng);
+    console.log("Moving marker:", targetLat, targetLng);
 
-    if(currentLat===null){
+    if (currentLat === null) {
 
-        currentLat=targetLat;
-        currentLng=targetLng;
+        currentLat = targetLat;
+        currentLng = targetLng;
 
-        marker.setLatLng([
+        marker.setLatLng([currentLat, currentLng]);
 
-            currentLat,
-
-            currentLng
-
-        ]);
-
-        map.panTo([
-
-            currentLat,
-
-            currentLng
-
-        ]);
+        map.panTo([currentLat, currentLng], {
+            animate: true,
+            duration: 0.5
+        });
 
         return;
-
     }
 
-    if(animation){
-
+    if (animation) {
         clearInterval(animation);
-
     }
 
-    const steps=60;
+    const steps = 60;
 
-    let step=0;
+    let step = 0;
 
-    const latStep=(targetLat-currentLat)/steps;
+    const latStep = (targetLat - currentLat) / steps;
 
-    const lngStep=(targetLng-currentLng)/steps;
+    const lngStep = (targetLng - currentLng) / steps;
 
-    animation=setInterval(()=>{
+    animation = setInterval(() => {
 
         step++;
 
-        currentLat+=latStep;
+        currentLat += latStep;
 
-        currentLng+=lngStep;
+        currentLng += lngStep;
 
         marker.setLatLng([
-
             currentLat,
-
             currentLng
-
         ]);
 
         map.panTo(
-
-            [
-
-                currentLat,
-
-                currentLng
-
-            ],
-
+            [currentLat, currentLng],
             {
-
-                animate:false
-
+                animate: false
             }
-
         );
 
-        if(step>=steps){
+        if (step >= steps) {
 
             clearInterval(animation);
 
-            currentLat=targetLat;
+            currentLat = targetLat;
 
-            currentLng=targetLng;
+            currentLng = targetLng;
 
             marker.setLatLng([
-
                 currentLat,
-
                 currentLng
-
             ]);
-
         }
 
-    },50);
+    }, 50);
 
 }
 
@@ -173,23 +157,21 @@ function moveMarkerSmoothly(targetLat,targetLng){
 // Load Live Tracking
 // =====================================
 
-async function loadTracking(selectedBus){
+async function loadTracking(selectedBus) {
 
-    if(selectedBus){
-
+    if (selectedBus) {
         busNumber = selectedBus;
-
     }
 
-    try{
+    try {
 
         const response = await fetch(
             `https://laudable-integrity-production-6b9e.up.railway.app/api/live/${busNumber}`
         );
 
-        if(!response.ok){
+        if (!response.ok) {
 
-            if(!busNotRunningShown){
+            if (!busNotRunningShown) {
 
                 busNotRunningShown = true;
 
@@ -201,12 +183,39 @@ async function loadTracking(selectedBus){
 
         }
 
+        busNotRunningShown = false;
+
         const data = await response.json();
 
         console.log(data);
 
         // ===============================
-        // Draw Route (Only Once)
+        // Show Tracking Container
+        // ===============================
+
+        const trackingContainer = document.getElementById("trackingContainer");
+
+        if (trackingContainer.style.display === "none") {
+
+            trackingContainer.style.display = "block";
+
+            // IMPORTANT: Refresh Leaflet after container becomes visible
+            setTimeout(() => {
+
+                map.invalidateSize();
+
+                if (routeLine) {
+                    map.fitBounds(routeLine.getBounds(), {
+                        padding: [30, 30]
+                    });
+                }
+
+            }, 300);
+
+        }
+
+        // ===============================
+        // Draw Route
         // ===============================
 
         await drawRoute(
@@ -215,104 +224,117 @@ async function loadTracking(selectedBus){
         );
 
         // ===============================
-        // Bus Information
+        // Bus Details
         // ===============================
 
-        document.getElementById("busNumber").innerHTML =
+        document.getElementById("busNumber").textContent =
             data.busNumber;
 
-        document.getElementById("currentDistrict").innerHTML =
+        document.getElementById("status").textContent =
+            data.delayed ? "⚠ DELAYED" : data.status;
+
+        document.getElementById("status").style.color =
+            data.delayed ? "#d32f2f" : "#4CAF50";
+
+        document.getElementById("currentDistrict").textContent =
             data.currentDistrict;
 
-        document.getElementById("nextDistrict").innerHTML =
+        document.getElementById("nextDistrict").textContent =
             data.nextDistrict;
 
-        document.getElementById("eta").innerHTML =
+        document.getElementById("eta").textContent =
             data.etaMinutes + " Minutes";
+
+        // ===============================
+        // Progress Bar
+        // ===============================
 
         document.getElementById("progressFill").style.width =
             data.progress + "%";
 
-        document.getElementById("progressText").innerHTML =
+        document.getElementById("progressText").textContent =
             data.progress.toFixed(1) + "%";
 
         // ===============================
-        // Delay Handling
+        // Delay Section
         // ===============================
 
-        if(data.delayed){
+        const delaySection = document.getElementById("delaySection");
+        const delayReason = document.getElementById("delayReason");
+        const delayMinutes = document.getElementById("delayMinutes");
 
-            document.getElementById("status").innerHTML =
-                "⚠ DELAYED";
+        if (data.delayed) {
 
-            document.getElementById("status").style.color =
-                "#d32f2f";
+            if (delaySection) {
 
-           const delaySection = document.getElementById("delaySection");
-const delayReason = document.getElementById("delayReason");
-const delayMinutes = document.getElementById("delayMinutes");
+                delaySection.style.display = "block";
 
-if(delaySection){
+            }
 
-    delaySection.style.display = "block";
+            if (delayReason) {
 
-}
+                delayReason.textContent = data.delayReason;
 
-if(delayReason){
+            }
 
-    delayReason.innerHTML = data.delayReason;
+            if (delayMinutes) {
 
-}
+                delayMinutes.textContent =
+                    data.delayMinutes + " Minutes";
 
-if(delayMinutes){
+            }
 
-    delayMinutes.innerHTML =
-        data.delayMinutes + " Minutes";
-
-}
             marker.bindPopup(
+
                 `<b>🚌 ${data.busNumber}</b>
+
                 <br><br>
+
                 <span style="color:red;">
                 ⚠ DELAYED
                 </span>
+
                 <br>
+
                 Reason : ${data.delayReason}
+
                 <br>
+
                 Delay : ${data.delayMinutes} Minutes
+
                 <br>
+
                 ETA : ${data.etaMinutes} Minutes`
+
             );
 
         }
-        else{
+        else {
 
-            document.getElementById("status").innerHTML =
-                data.status;
+            if (delaySection) {
 
-            document.getElementById("status").style.color =
-                "#4CAF50";
+                delaySection.style.display = "none";
 
-           const delaySection = document.getElementById("delaySection");
-
-if(delaySection){
-
-    delaySection.style.display = "none";
-
-}
+            }
 
             marker.bindPopup(
+
                 `<b>🚌 ${data.busNumber}</b>
+
                 <br>
+
                 Status : ${data.status}
+
                 <br>
+
                 ETA : ${data.etaMinutes} Minutes`
+
             );
 
         }
 
         // ===============================
-        // Move Bus Marker
+        // Move Marker
         // ===============================
 
         moveMarkerSmoothly(
@@ -321,137 +343,116 @@ if(delaySection){
         );
 
     }
-    catch(error){
+    catch (error) {
 
-        console.log(error);
+        console.error("Tracking Error:", error);
 
     }
 
-}
-
+}            
 // =====================================
 // Draw Route
 // =====================================
 
-async function drawRoute(source,destination){
+async function drawRoute(source, destination) {
 
-    if(routeDrawn){
-
+    if (routeDrawn) {
         return;
-
     }
 
-    try{
+    try {
 
         const response = await fetch(
-
             `https://laudable-integrity-production-6b9e.up.railway.app/api/routes?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`
-
         );
+
+        if (!response.ok) {
+            console.error("Unable to load route.");
+            return;
+        }
 
         const route = await response.json();
 
+        const districtCoordinates = {
+
+            "Bengaluru": [12.9716, 77.5946],
+            "Tumakuru": [13.3409, 77.1010],
+            "Ramanagara": [12.7219, 77.2810],
+            "Mandya": [12.5239, 76.8953],
+            "Mysuru": [12.2958, 76.6394],
+
+            "Chitradurga": [14.2251, 76.3983],
+            "Davanagere": [14.4663, 75.9238],
+            "Haveri": [14.7951, 75.3991],
+            "Gadag": [15.4315, 75.6355],
+            "Koppal": [15.3450, 76.1548],
+            "Ballari": [15.1394, 76.9214],
+
+            "Hubballi": [15.3647, 75.1240],
+            "Belagavi": [15.8497, 74.4977],
+            "Mangaluru": [12.9141, 74.8560]
+
+        };
+
         const latLngs = [];
 
-        route.forEach(district=>{
+        route.forEach(district => {
 
-            switch(district){
+            if (districtCoordinates[district]) {
 
-                case "Bengaluru":
-                    latLngs.push([12.9716,77.5946]);
-                    break;
-
-                case "Tumakuru":
-                    latLngs.push([13.3409,77.1010]);
-                    break;
-
-                case "Chitradurga":
-                    latLngs.push([14.2251,76.3983]);
-                    break;
-
-                case "Davanagere":
-                    latLngs.push([14.4663,75.9238]);
-                    break;
-
-                case "Haveri":
-                    latLngs.push([14.7951,75.3991]);
-                    break;
-
-                case "Gadag":
-                    latLngs.push([15.4315,75.6355]);
-                    break;
-
-                case "Koppal":
-                    latLngs.push([15.3450,76.1548]);
-                    break;
-
-                case "Ballari":
-                    latLngs.push([15.1394,76.9214]);
-                    break;
-
-                case "Ramanagara":
-                    latLngs.push([12.7219,77.2810]);
-                    break;
-
-                case "Mandya":
-                    latLngs.push([12.5239,76.8953]);
-                    break;
-
-                case "Mysuru":
-                    latLngs.push([12.2958,76.6394]);
-                    break;
-
-                case "Belagavi":
-                    latLngs.push([15.8497,74.4977]);
-                    break;
-
-                case "Hubballi":
-                    latLngs.push([15.3647,75.1240]);
-                    break;
-
-                case "Mangaluru":
-                    latLngs.push([12.9141,74.8560]);
-                    break;
+                latLngs.push(
+                    districtCoordinates[district]
+                );
 
             }
 
         });
 
-        if(routeLine){
+        if (latLngs.length === 0) {
+
+            console.warn("No coordinates found for this route.");
+
+            return;
+
+        }
+
+        if (routeLine) {
 
             map.removeLayer(routeLine);
 
         }
 
-        routeLine = L.polyline(
+        routeLine = L.polyline(latLngs, {
 
-            latLngs,
+            color: "#1565C0",
 
-            {
+            weight: 6,
 
-                color:"#1565C0",
+            opacity: 0.9,
 
-                weight:6,
+            lineJoin: "round"
 
-                opacity:0.85
+        }).addTo(map);
 
-            }
+        routeDrawn = true;
 
-        ).addTo(map);
+        map.fitBounds(routeLine.getBounds(), {
 
-        // Only zoom once
-        if(!routeDrawn){
+            padding: [40, 40]
 
-            map.fitBounds(routeLine.getBounds());
+        });
 
-            routeDrawn = true;
+        // Refresh map after drawing
+        setTimeout(() => {
 
-        }
+            map.invalidateSize();
+
+        }, 200);
 
     }
-    catch(error){
+    catch (error) {
 
-        console.log(error);
+        console.error("Route Error:", error);
 
     }
 
@@ -461,36 +462,86 @@ async function drawRoute(source,destination){
 // Start Live Tracking
 // =====================================
 
-function startLiveTracking(busNo){
+function startLiveTracking(busNo) {
 
     busNumber = busNo;
 
-    // Reset everything for a new bus
+    busNotRunningShown = false;
+
+    // Stop previous tracking
+    if (trackingInterval) {
+        clearInterval(trackingInterval);
+        trackingInterval = null;
+    }
+
+    if (animation) {
+        clearInterval(animation);
+        animation = null;
+    }
+
+    // Reset route
     routeDrawn = false;
 
     currentLat = null;
-
     currentLng = null;
 
-    if(animation){
+    // Remove old route
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
 
-        clearInterval(animation);
+    // Show tracking container
+    const trackingContainer =
+        document.getElementById("trackingContainer");
+
+    if (trackingContainer) {
+
+        trackingContainer.style.display = "block";
+
+        // IMPORTANT
+        // Refresh Leaflet after becoming visible
+        setTimeout(() => {
+
+            map.invalidateSize();
+
+        }, 300);
 
     }
 
-    if(trackingInterval){
-
-        clearInterval(trackingInterval);
-
-    }
-
+    // Load immediately
     loadTracking(busNo);
 
-    trackingInterval = setInterval(()=>{
+    // Refresh every 3 seconds
+    trackingInterval = setInterval(() => {
 
         loadTracking(busNo);
 
-    },3000);
+    }, 3000);
+
+}
+
+// =====================================
+// Stop Live Tracking
+// =====================================
+
+function stopLiveTracking() {
+
+    if (trackingInterval) {
+
+        clearInterval(trackingInterval);
+
+        trackingInterval = null;
+
+    }
+
+    if (animation) {
+
+        clearInterval(animation);
+
+        animation = null;
+
+    }
 
 }
 
@@ -498,14 +549,58 @@ function startLiveTracking(busNo){
 // Back Button
 // =====================================
 
-function goBack(){
+function goBack() {
 
-    if(trackingInterval){
+    stopLiveTracking();
 
-        clearInterval(trackingInterval);
-
-    }
-
-    window.location.href="dashboard.html";
+    window.location.href = "dashboard.html";
 
 }
+
+// =====================================
+// Refresh Map on Mobile Orientation Change
+// =====================================
+
+window.addEventListener("orientationchange", () => {
+
+    setTimeout(() => {
+
+        map.invalidateSize();
+
+        if (routeLine) {
+
+            map.fitBounds(routeLine.getBounds(), {
+
+                padding: [40, 40]
+
+            });
+
+        }
+
+    }, 500);
+
+});
+
+// =====================================
+// Refresh When Window Resizes
+// =====================================
+
+window.addEventListener("resize", () => {
+
+    setTimeout(() => {
+
+        map.invalidateSize();
+
+    }, 300);
+
+});
+
+// =====================================
+// Cleanup on Page Exit
+// =====================================
+
+window.addEventListener("beforeunload", () => {
+
+    stopLiveTracking();
+
+});
