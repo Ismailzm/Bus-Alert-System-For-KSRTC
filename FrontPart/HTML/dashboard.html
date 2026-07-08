@@ -2,89 +2,83 @@
 <html lang="en">
 
 <head>
- 
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BusAlert Dashboard</title>
 
     <link rel="stylesheet" href="../CSS/dashboard.css">
 
+    <link rel="stylesheet" href="../CSS/toast.css">
+
     <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 </head>
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- ===============================
+         Sidebar
+    ================================ -->
 
     <div class="sidebar">
 
-    <h2>🚌 BusAlert</h2>
+        <h2>🚌 BusAlert</h2>
 
-    <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="dashboard.html">🏠 Dashboard</a>
 
-    <a href="search.html">🔍 Search Bus</a>
+        <a href="search.html">🔍 Search Bus</a>
 
-    <a href="alert.html">🚨 Create Alert</a>
+        <a href="alert.html">🚨 Create Alert</a>
 
-    <a href="notification.html">🔔 Notifications</a>
+        <a href="notification.html">🔔 Notifications</a>
 
-    <hr>
+        <hr>
 
-    <h3 style="color:white;padding:10px 20px;">Administration</h3>
+        <h3>Administration</h3>
 
-    <a href="admin.html">⚙️ Admin Panel</a>
+        <a href="admin.html">⚙️ Admin Panel</a>
 
-    <a href="delay-management.html">
+        <a href="delay-management.html">🚨 Delay Reports</a>
 
-    🚨 Delay Reports
-
-</a>
-
-    <a href="#" onclick="logout()">🚪 Logout</a>
-
-</div>
-
-    <!-- Main -->
-
-    <div class="main">
-
-        <!-- Top Bar -->
-
-        <div class="topbar"
-     style="display:flex;
-            justify-content:space-between;
-            align-items:center;">
-
-    <div style="display:flex;align-items:center;gap:20px;">
-
-        <h1>KSRTC Smart Dashboard</h1>
-
-        <button
-            onclick="openDelayModal()"
-            style="
-                width:auto;
-                padding:12px 20px;
-                background:#ff9800;
-                border:none;
-                border-radius:10px;
-                color:white;
-                font-weight:bold;
-                cursor:pointer;">
-
-            🚨 Notify Delay
-
-        </button>
+        <a href="#" onclick="logout()">🚪 Logout</a>
 
     </div>
 
-    <h2 id="welcomeUser"
-        style="color:#1565C0;"></h2>
+    <!-- ===============================
+         Main Content
+    ================================ -->
 
-</div>
-        <!-- Dashboard Cards -->
+    <div class="main">
+
+        <!-- Topbar -->
+
+        <div class="topbar">
+
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+
+                <h1>KSRTC Smart Dashboard</h1>
+
+                <button onclick="openDelayModal()"
+                        style="background:#ff9800;color:white;">
+
+                    🚨 Notify Delay
+
+                </button>
+
+            </div>
+
+            <h2 id="welcomeUser"
+                style="color:#1565C0;"></h2>
+
+        </div>
+
+        <!-- ===============================
+             Dashboard Cards
+        ================================ -->
 
         <div class="cards">
 
@@ -122,193 +116,198 @@
 
         </div>
 
-        <!-- Map -->
+        <!-- ===============================
+             Live Tracking
+        ================================ -->
 
         <div id="trackingContainer" style="display:none;">
 
-    <div style="display:flex;gap:20px;align-items:flex-start;">
+            <div class="tracking-layout">
 
-        <div style="
-            width:320px;
-            background:white;
-            padding:20px;
-            border-radius:15px;
-            box-shadow:0 5px 15px rgba(0,0,0,.15);">
+                <!-- Tracking Card -->
 
-            <h2>🚌 Live Tracking</h2>
+                <div class="tracking-card">
 
-            <br>
+                    <h2>🚌 Live Tracking</h2>
 
-            <p><b>Bus :</b> <span id="busNumber">-</span></p>
+                    <br>
 
-            <br>
+                    <p><b>Bus :</b> <span id="busNumber">-</span></p>
 
-            <p><b>Status :</b> <span id="status">-</span></p>
+                    <br>
 
-            <br>
+                    <p><b>Status :</b>
 
-            <p><b>Current :</b> <span id="currentDistrict">-</span></p>
+                        <span id="status">-</span>
 
-            <br>
+                    </p>
 
-            <p><b>Next :</b> <span id="nextDistrict">-</span></p>
+                    <br>
 
-            <br>
+                    <p><b>Current :</b>
 
-            <p><b>ETA :</b> <span id="eta">-</span></p>
+                        <span id="currentDistrict">-</span>
 
-            <br>
+                    </p>
 
-            <div style="
-                background:#ddd;
-                height:15px;
-                border-radius:20px;">
+                    <br>
 
-                <div id="progressFill"
-                     style="
-                        width:0%;
-                        height:15px;
-                        background:#4CAF50;
-                        border-radius:20px;">
+                    <p><b>Next :</b>
+
+                        <span id="nextDistrict">-</span>
+
+                    </p>
+
+                    <br>
+
+                    <p><b>ETA :</b>
+
+                        <span id="eta">-</span>
+
+                    </p>
+
+                    <br>
+
+                    <div style="background:#ddd;height:15px;border-radius:20px;">
+
+                        <div id="progressFill"
+                             style="width:0%;height:15px;background:#4CAF50;border-radius:20px;">
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <center>
+
+                        <span id="progressText">
+
+                            0%
+
+                        </span>
+
+                    </center>
+
+                </div>
+
+                <!-- Map -->
+
+                <div class="map-container">
+
+                    <div id="map"></div>
 
                 </div>
 
             </div>
 
-            <br>
+        </div>
 
-            <center>
 
-                <span id="progressText">
+             <!-- ======================================
+             Delay Notification Modal
+        ======================================= -->
 
-                    0%
+        <div id="delayModal"
+             style="
+                display:none;
+                position:fixed;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                background:rgba(0,0,0,.5);
+                justify-content:center;
+                align-items:center;
+                z-index:9999;">
 
-                </span>
+            <div style="
+                    width:500px;
+                    background:white;
+                    padding:30px;
+                    border-radius:15px;
+                    box-shadow:0 5px 20px rgba(0,0,0,.2);">
 
-            </center>
+                <h2>🚨 Notify Bus Delay</h2>
+
+                <br>
+
+                <label><b>Bus Number</b></label>
+
+                <select id="delayBusNumber"></select>
+
+                <br><br>
+
+                <label><b>Reason</b></label>
+
+                <select id="delayReason"
+                        onchange="toggleOtherReason()">
+
+                    <option>Heavy Traffic</option>
+                    <option>Road Work</option>
+                    <option>Heavy Rain</option>
+                    <option>Vehicle Breakdown</option>
+                    <option>Accident</option>
+                    <option>Police Checking</option>
+                    <option>Other</option>
+
+                </select>
+
+                <br><br>
+
+                <input
+                    id="otherReason"
+                    placeholder="Enter Reason"
+                    style="display:none;">
+
+                <br><br>
+
+                <label><b>Delay Duration</b></label>
+
+                <select id="delayMinutes">
+
+                    <option value="5">5 Minutes</option>
+                    <option value="10">10 Minutes</option>
+                    <option value="15">15 Minutes</option>
+                    <option value="20">20 Minutes</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                    <option value="90">More than 1 Hour</option>
+
+                </select>
+
+                <br><br>
+
+                <button onclick="submitDelayReport()">
+
+                    Submit
+
+                </button>
+
+                <br><br>
+
+                <button
+                    onclick="closeDelayModal()"
+                    style="background:#777;">
+
+                    Cancel
+
+                </button>
+
+            </div>
 
         </div>
 
-     <div id="map" class="map-container"></div>
-
     </div>
 
-</div>
+    <!-- ======================================
+         Styles & Scripts
+    ======================================= -->
 
-
-
-<!-- ======================================
-     Delay Notification Modal
-====================================== -->
-
-<div id="delayModal"
-     style="
-        display:none;
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,.5);
-        justify-content:center;
-        align-items:center;
-        z-index:9999;">
-
-    <div style="
-        width:500px;
-        background:white;
-        padding:30px;
-        border-radius:15px;">
-
-        <h2>🚨 Notify Bus Delay</h2>
-
-        <br>
-
-        <label>Bus Number</label>
-
-        <select id="delayBusNumber">
-
-        </select>
-
-        <br><br>
-
-        <label>Reason</label>
-
-        <select id="delayReason"
-                onchange="toggleOtherReason()">
-
-            <option>Heavy Traffic</option>
-
-            <option>Road Work</option>
-
-            <option>Heavy Rain</option>
-
-            <option>Vehicle Breakdown</option>
-
-            <option>Accident</option>
-
-            <option>Police Checking</option>
-
-            <option>Other</option>
-
-        </select>
-
-        <br><br>
-
-        <input
-            id="otherReason"
-            placeholder="Enter Reason"
-            style="display:none;">
-
-        <br><br>
-
-        <label>Delay</label>
-
-        <select id="delayMinutes">
-
-            <option value="5">5 Minutes</option>
-
-            <option value="10">10 Minutes</option>
-
-            <option value="15">15 Minutes</option>
-
-            <option value="20">20 Minutes</option>
-
-            <option value="30">30 Minutes</option>
-             <option value="30">1 Hour </option>
-            <option value="30">More than 1 Hour</option>
-
-        </select>
-
-        <br><br>
-
-        <button onclick="submitDelayReport()">
-
-            Submit
-
-        </button>
-
-        <br><br>
-
-        <button
-            onclick="closeDelayModal()"
-            style="background:#777;">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-</div>
-
-    <link rel="stylesheet" href="../CSS/toast.css">
-
-<script src="../Js/toast.js"></script>
-
-
+    <script src="../Js/toast.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script src="../Js/live-tracking.js"></script>
 
     <script src="../Js/dashboard.js"></script>
