@@ -32,4 +32,16 @@ public class NotificationService {
 
     }
 
+    public void deleteNotification(Long id) {
+
+    notificationRepository.deleteById(id);
+
+}
+
+public void deleteAllNotifications(Long userId) {
+
+    notificationRepository.deleteByUserId(userId);
+
+}
+
 }
