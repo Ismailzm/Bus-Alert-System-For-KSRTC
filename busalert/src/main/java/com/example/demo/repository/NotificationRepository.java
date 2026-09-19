@@ -13,5 +13,6 @@ import com.example.demo.entity.Notification;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
     List<Notification> findByUserId(Long userId);
+    void deleteByUserId(Long userId);
 
 }
